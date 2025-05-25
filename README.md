@@ -1,5 +1,11 @@
 # FastAPI Template
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ssanga_QA-example&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ssanga_QA-example)
+
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ssanga_QA-example&metric=coverage)](https://sonarcloud.io/summary/new_code?id=ssanga_QA-example)
+
+[![Python CI](
+
 This sample repo contains the recommended structure for a Python FastAPI project. In this sample, we use `fastapi` to build a web application and the `pytest` to run tests.
 
 For a more in-depth tutorial, see our [Fast API tutorial](https://code.visualstudio.com/docs/python/tutorial-fastapi).
@@ -39,4 +45,3 @@ Para más información sobre cómo integrar la cobertura de tests de Python en S
 [https://docs.sonarsource.com/sonarqube-cloud/enriching/test-coverage/python-test-coverage/](https://docs.sonarsource.com/sonarqube-cloud/enriching/test-coverage/python-test-coverage/)
 
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ssanga_QA-example&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ssanga_QA-example)
