@@ -86,12 +86,16 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D4E5E200AF3743B7B4F2D03887C5DD3C }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_8893EC1ABB7D44949E0F99C9403F9BDA }}
 
-      - name: Set Startup Command
+      - name: Check and Set Startup Command
         run: |
-          az webapp config set \
-            --name QA-Example \
-            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-            --startup-file "gunicorn -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000 -t 300 app:app"
+          CURRENT_STARTUP=$(az webapp config show --name QA-Example --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} --query linuxFxVersion -o tsv)
+          DESIRED_STARTUP="gunicorn -w 1 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000 -t 300 app:app"
+          if [ "$CURRENT_STARTUP" != "$DESIRED_STARTUP" ]; then
+            az webapp config set \
+              --name QA-Example \
+              --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+              --startup-file "$DESIRED_STARTUP"
+          fi
       
       - name: Wait for configuration to stabilize
         run: sleep 10
