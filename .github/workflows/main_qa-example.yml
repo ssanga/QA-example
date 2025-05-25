@@ -7,7 +7,7 @@ name: Build and deploy Python app to Azure Web App - QA-Example
 on:
   push:
     branches:
-      - main
+      - none
   workflow_dispatch:
 
 jobs:

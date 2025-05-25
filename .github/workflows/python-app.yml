@@ -2,7 +2,7 @@ name: Build
 on:
   push:
     branches:
-      - main
+      - none
   pull_request:
     types: [opened, synchronize, reopened]
   workflow_dispatch:  # <-- Esto habilita el botón "Run workflow"
