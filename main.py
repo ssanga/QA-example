@@ -39,3 +39,7 @@ def divide(a: float = Query(...), b: float = Query(...)):
         return {"result": result}
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
+    
+@app.get("/power")
+def power(a: float = Query(...), b: float = Query(...)):
+    return {"result": calc.power(a, b)}
