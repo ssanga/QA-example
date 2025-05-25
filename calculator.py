@@ -12,3 +12,6 @@ class Calculator:
         if b == 0:
             raise ValueError("Division by zero is not allowed.")
         return a / b
+    
+    def power(self, a: float, b: float) -> float:
+        return a ** b
