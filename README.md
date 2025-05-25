@@ -37,3 +37,6 @@ In addition to these extension there a few settings that are also useful to enab
 
 Para más información sobre cómo integrar la cobertura de tests de Python en SonarQube, consulta la documentación oficial:  
 [https://docs.sonarsource.com/sonarqube-cloud/enriching/test-coverage/python-test-coverage/](https://docs.sonarsource.com/sonarqube-cloud/enriching/test-coverage/python-test-coverage/)
+
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ssanga_QA-example&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ssanga_QA-example)
