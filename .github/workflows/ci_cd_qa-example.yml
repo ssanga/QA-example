@@ -92,7 +92,9 @@ jobs:
             --name QA-Example \
             --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
             --startup-file "gunicorn -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000 -t 300 app:app"
-
+      
+      - name: Wait for configuration to stabilize
+        run: sleep 10
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
