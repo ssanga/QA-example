@@ -25,3 +25,10 @@ def test_divide():
 def test_divide_by_zero():
     with pytest.raises(ValueError):
         calc.divide(5, 0)
+
+def test_power():
+    assert calc.power(2, 3) == 8
+    assert calc.power(5, 0) == 1
+    assert calc.power(9, 0.5) == pytest.approx(3)
+    assert calc.power(-2, 3) == -8
+    assert calc.power(4, -1) == pytest.approx(0.25)
