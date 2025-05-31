@@ -106,3 +106,22 @@ jobs:
         with:
           app-name: 'QA-Example'
           slot-name: 'Production'
+
+      - name: 'Post-deployment actions'
+        run: |
+          echo "Deployment completed successfully."
+          echo "Web App URL: ${{ steps.deploy-to-webapp.outputs.webapp-url }}"
+
+      
+      - name: Wait for deploy to stabilize
+        run: sleep 10
+
+      - name: Smoke Test API
+        run: |
+          RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" ${{ steps.deploy-to-webapp.outputs.webapp-url }}/health)
+          if [ "$RESPONSE_CODE" -eq 200 ]; then
+            echo "Smoke test passed: API responded with status 200"
+          else
+            echo "Smoke test failed: API responded with status $RESPONSE_CODE"
+            exit 1
+          fi
