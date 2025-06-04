@@ -49,7 +49,7 @@ jobs:
         with:
           exit_zero: true  # Continúa incluso si encuentra vulnerabilidades
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Para reportes SARIF
-          path: app.py,utils.py  # Escanea solo archivos relevantes
+          path: .  # Escanea todos los archivos Python en la raíz
           level: MEDIUM  # Severidad MEDIUM o superior
           confidence: MEDIUM  # Confianza MEDIUM o superior
           excluded_paths: venv,tests,.coverage  # Excluye directorios
@@ -120,7 +120,7 @@ jobs:
 
       - name: 'Post-deployment actions'
         run: |
-          echo "Deployment completed successfully."
+          echo 'Deployment completed successfully.'
           echo "Web App URL: ${{ steps.deploy-to-webapp.outputs.webapp-url }}"
 
       - name: Wait for deploy to stabilize
@@ -128,10 +128,11 @@ jobs:
 
       - name: Smoke Test API
         run: |
-          RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" ${{ steps.deploy-to-webapp.outputs.webapp-url }}/health)
-          if [ "$RESPONSE_CODE" -eq 200 ]; then
-            echo "Smoke test passed: API responded with status 200"
+          RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" "${{ steps.deploy-to-webapp.outputs.webapp-url }}/health"))
+          if [ "$RESPONSE_CODE" -eq 200" ]; then
+            echo "Smoke test passed with status 200."
+            exit 0
           else
-            echo "Smoke test failed: API responded with status $RESPONSE_CODE"
+            echo "Error: Smoke test failed with status $RESPONSE_CODE."
             exit 1
           fi
