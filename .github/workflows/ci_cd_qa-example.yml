@@ -52,7 +52,7 @@ jobs:
             path: .  # Escanea todos los archivos Python en la raíz
             level: MEDIUM  # Severidad MEDIUM o superior
             confidence: MEDIUM  # Confianza MEDIUM o superior
-            excluded_paths: venv,tests,.coverage,venv/lib,venv/bin
+            excluded_paths: "venv,tests,.coverage,venv/lib,venv/bin"
               
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
