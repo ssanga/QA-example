@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      security-events: write  # Necesario para subir reportes SARIF de Bandit
 
     steps:
       - uses: actions/checkout@v4
@@ -31,9 +32,7 @@ jobs:
           source venv/bin/activate
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install bandit==1.7.10  # Versión estable de Bandit
+        run: pip install -r requirements.txt
 
       - name: Run tests with coverage
         run: |
@@ -45,15 +44,15 @@ jobs:
           name: coverage-report
           path: coverage.xml
 
-      - name: Run Bandit
-        run: bandit -r . -f json -o bandit-report.json
-        continue-on-error: true  # Evita que el pipeline falle si Bandit encuentra issues
-
-      - name: Upload Bandit report as artifact
-        uses: actions/upload-artifact@v4
+      - name: Bandit Scan
+        uses: shundor/python-bandit-scan@ab1d87dfccc5a0ffab88be3aaac6ffe35c10d6cd
         with:
-          name: bandit-report
-          path: bandit-report.json
+          exit_zero: true  # Continúa incluso si encuentra vulnerabilidades
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Para reportes SARIF
+          path: app.py,utils.py  # Escanea solo archivos relevantes
+          level: MEDIUM  # Severidad MEDIUM o superior
+          confidence: MEDIUM  # Confianza MEDIUM o superior
+          excluded_paths: venv,tests,.coverage  # Excluye directorios
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
