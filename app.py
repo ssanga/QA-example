@@ -168,4 +168,5 @@ def insecure_subprocess(user_input):
 
 # Seguridad 3: Deserialización insegura
 def insecure_deserialization(data):
-    # Activa regla S2631 (deserialización inseg
+    # Activa regla S4960 (deserialización insegura)
+    return pickle.loads(data)  # Vulnerabilidad: deserialización sin validar
