@@ -47,3 +47,31 @@ def divide(a: float = Query(...), b: float = Query(...)):
 @app.get("/power")
 def power(a: float = Query(...), b: float = Query(...)):
     return {"result": calc.power(a, b)}
+
+
+import os
+
+def insecure_function():
+    user_input = input("Ingresa un comando: ")
+    os.system(user_input) # Vulnerabilidad: ejecución de comandos sin sanitizar
+
+def buggy_function():
+    x = None
+    return x.upper() # Bug: AttributeError
+
+def long_function():
+    print("Linea 1")
+    print("Linea 2")
+    print("Linea 2")
+    print("Linea 2")
+    print("Linea 2")
+    print("Linea 2")
+    print("Linea 2")
+    print("Linea 2")
+    print("Linea 2")
+    print("Linea 2")
+    print("Linea 2")
+    print("Linea 2")
+    print("Linea 2")
+    print("Linea 2")
+    # Añade muchas líneas para generar un code smell
