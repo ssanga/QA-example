@@ -49,10 +49,10 @@ jobs:
         with:
           exit_zero: true  # Continúa incluso si encuentra vulnerabilidades
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Para reportes SARIF
-          path: ./app.py,./utils.py  # Escanea solo app.py y utils.py
+          path: .  # Escanea todos los archivos Python en la raíz
           level: MEDIUM  # Severidad MEDIUM o superior
           confidence: MEDIUM  # Confianza MEDIUM o superior
-          excluded_paths: venv/,tests/,.coverage  # Excluye directorios con rutas explícitas
+          excluded_paths: venv/**,tests/**,.coverage  # Excluye directorios recursivamente
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
