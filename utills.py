@@ -30,8 +30,13 @@ def long_function():
 
 
 
+import os
+import subprocess
+import pickle
+import hashlib
+
 # Code Smell 1: Método demasiado largo
-def overly_long_function(a, b, c, d, e, f, g, h, i, j, k, l):
+def overly_long_function(a, b, c, d, e, f, g, h, input_i, j, k, l):
     # Más de 100 líneas para activar regla S138 (método demasiado largo)
     print("Inicio del cálculo complejo")
     result = a + b
@@ -40,16 +45,15 @@ def overly_long_function(a, b, c, d, e, f, g, h, i, j, k, l):
         result += d
     else:
         result -= d
-    for i in range(100):
-        result += i * e
+    for loop_i in range(100):  # Renombrado para evitar S1481
+        result += loop_i * e
     if f == "test":
         result *= 2
-    # ... (imaginemos 80 líneas más de lógica similar)
-    print(f"Parámetros: {a}, {b}, {c}, {d}, {e}, {f}, {g}, {h}, {i}, {j}, {k}, {l}")
+    # Simulamos un método largo con comentarios
+    print(f"Parámetros: {a}, {b}, {c}, {d}, {e}, {f}, {g}, {h}, {input_i}, {j}, {k}, {l}")
     print("Cálculo intermedio 1")
     print("Cálculo intermedio 2")
-    # Simulamos un método largo con comentarios
-    # ... (líneas adicionales)
+    # ... (imaginemos 80 líneas más de lógica similar)
     return result
 
 # Code Smell 2: Demasiados parámetros
@@ -105,16 +109,32 @@ def duplicated_code_2():
     return z
 
 # Seguridad 1: Ejecución de comandos inseguros
+def insecure_function():
+    user_input = input("Ingresa un comando: ")
+    os.system(user_input)  # Activa regla S2076 (OS command injection)
+
+# Seguridad 2: Ejecución de comandos inseguros
 def insecure_command_execution(user_input):
-    # Activa regla S2076 (OS command injection)
-    os.system(f"echo {user_input}")  # Vulnerabilidad: entrada no sanitizada
+    os.system(f"echo {user_input}")  # Activa regla S2076 (OS command injection)
 
-# Seguridad 2: Uso de subprocess con shell=True
+# Seguridad 3: Uso de subprocess con shell=True
 def insecure_subprocess(user_input):
-    # Activa regla S2076 o S5144 (inyección de comandos)
-    subprocess.run(f"ls {user_input}", shell=True)  # Vulnerabilidad: entrada no sanitizada
+    subprocess.run(f"ls {user_input}", shell=True)  # Activa regla S2076 o S5144
 
-# Seguridad 3: Deserialización insegura
+# Seguridad 4: Deserialización insegura
 def insecure_deserialization(data):
-    # Activa regla S4960 (deserialización insegura)
-    return pickle.loads(data)  # Vulnerabilidad: deserialización sin validar
+    return pickle.loads(data)  # Activa regla S4960 (deserialización insegura)
+
+# Seguridad 5: Bug potencial
+def buggy_function():
+    x = None
+    return x.upper()  # Activa regla S1764 (acceso a atributo en None)
+
+# Seguridad 6: Nueva función para probar S2076
+def test_insecure_command():
+    user_cmd = "whoami"  # Simula entrada de usuario
+    os.system("ping " + user_cmd)  # Activa regla S2076 (OS command injection)
+
+# Seguridad 7: Nueva función para probar S5131
+def weak_crypto():
+    return hashlib.md5("test".encode()).hexdigest()  # Activa regla S5131 (algoritmo criptográfico débil)
