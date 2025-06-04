@@ -1,0 +1,3 @@
+[bandit]
+exclude_dirs: venv,tests,.coverage,venv/lib,venv/bin,venv/include,venv/Scripts
+skips: B101  # Ignora asserts, si es necesario
