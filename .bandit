@@ -1,3 +1,3 @@
 [bandit]
-exclude_dirs: venv/,tests/,.coverage/,venv/lib/,venv/bin/,venv/include/,venv/Scripts/,venv/*.py
+exclude_dirs: venv,tests,.coverage
 skips: B101
