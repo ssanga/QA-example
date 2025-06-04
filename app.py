@@ -80,7 +80,7 @@ def long_function():
 import os
 import subprocess
 import pickle
-import eval
+
 
 # Code Smell 1: Método demasiado largo
 def overly_long_function(a, b, c, d, e, f, g, h, i, j, k, l):
