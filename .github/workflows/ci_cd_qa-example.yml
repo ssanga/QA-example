@@ -3,7 +3,7 @@ name: CI/CD QA-Example
 on:
   push:
     branches:
-      - main
+      - none
   pull_request:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
