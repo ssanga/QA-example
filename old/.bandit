@@ -1,4 +1,0 @@
-[bandit]
-exclude_dirs: venv,tests
-severity: HIGH,MEDIUM
-confidence: 3,2  # 3=HIGH, 2=MEDIUM
