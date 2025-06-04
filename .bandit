@@ -1,5 +1,4 @@
 [bandit]
 exclude_dirs: venv,tests
-skips: B101  # Ignora assert_used (no relevante para tu proyecto)
-severity: HIGH,MEDIUM  # Reporta solo vulnerabilidades de severidad alta y media
-confidence: HIGH,MEDIUM  # Reporta solo vulnerabilidades con confianza alta y media
+severity: HIGH,MEDIUM
+confidence: 3,2  # 3=HIGH, 2=MEDIUM

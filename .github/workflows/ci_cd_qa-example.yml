@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          pip install bandit  # Añadido para Bandit
+          pip install bandit==1.7.10  # Versión estable de Bandit
 
       - name: Run tests with coverage
         run: |
