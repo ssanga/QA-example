@@ -3,14 +3,14 @@ name: CI/CD QA-Example
 on:
   push:
     branches:
-      - main
+      - none
   pull_request:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
 
 jobs:
   build-and-analyze:
-    name: Build, Test & SonarCloud
+    name: Build, Test & SonarQube
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -35,7 +35,6 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          source venv/bin/activate
           pytest --cov=./ --cov-report=xml
 
       - name: Upload coverage report as artifact
@@ -44,22 +43,10 @@ jobs:
           name: coverage-report
           path: coverage.xml
 
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v4
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.projectKey=ssanga_QA-example
-            -Dsonar.organization=ssanga
-            -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.python.version=3.11
-            -Dsonar.sources=.
-            -Dsonar.tests=tests
-            -Dsonar.test.inclusions=**/*test*.py,**/*_test.py
-            -Dsonar.coverage.exclusions=**/*test*.py,**/*_test.py
-            -Dsonar.python.coverage.reportPaths=coverage.xml
-            -Dsonar.verbose=true # Para depuración
 
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
@@ -113,18 +100,19 @@ jobs:
       - name: Wait for configuration to stabilize
         run: sleep 10
 
-      - name: Deploy to Azure Web App
+      - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: 'QA-Example'
           slot-name: 'Production'
 
-      - name: Post-deployment actions
+      - name: 'Post-deployment actions'
         run: |
           echo "Deployment completed successfully."
           echo "Web App URL: ${{ steps.deploy-to-webapp.outputs.webapp-url }}"
 
+      
       - name: Wait for deploy to stabilize
         run: sleep 10
 
