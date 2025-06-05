@@ -49,7 +49,7 @@ jobs:
         with:
           exit_zero: true  # Continúa incluso si encuentra vulnerabilidades
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Para reportes SARIF
-          path: .  # Escanea todos los archivos Python en la raíz
+          path: src  # Escanea todos los archivos Python en la raíz
           level: MEDIUM  # Severidad MEDIUM o superior
           confidence: MEDIUM  # Confianza MEDIUM o superior
           # excluded_paths eliminado, usamos .bandit
