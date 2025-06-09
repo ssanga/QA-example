@@ -59,4 +59,17 @@ Este test asegura que la aplicación está funcionando correctamente después de
 Para más información sobre cómo integrar la cobertura de tests de Python en SonarQube, consulta la documentación oficial:  
 [https://docs.sonarsource.com/sonarqube-cloud/enriching/test-coverage/python-test-coverage/](https://docs.sonarsource.com/sonarqube-cloud/enriching/test-coverage/python-test-coverage/)
 
+```mermaid
+graph TD
+    A[Inicio del Pipeline] --> B[Run Tests with Coverage]
+    B --> C[Upload Coverage Report]
+    C --> D[Bandit Scan]
+    D --> E[SonarQube Scan]
+    E --> F[Zip Artifact for Deployment]
+    F --> G[Upload Artifact for Deployment Jobs]
+    G --> H[Deploy to Azure Web App]
+    H --> I[Smoke Test - Call /health]
+    I --> J[Fin del Pipeline]
+```
+
 
