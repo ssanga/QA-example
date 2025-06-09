@@ -59,6 +59,8 @@ Este test asegura que la aplicación está funcionando correctamente después de
 Para más información sobre cómo integrar la cobertura de tests de Python en SonarQube, consulta la documentación oficial:  
 [https://docs.sonarsource.com/sonarqube-cloud/enriching/test-coverage/python-test-coverage/](https://docs.sonarsource.com/sonarqube-cloud/enriching/test-coverage/python-test-coverage/)
 
+### Diagrama del Pipeline CI/CD
+
 ```mermaid
 graph TD
     A[Inicio del Pipeline] --> B[Run Tests with Coverage]
