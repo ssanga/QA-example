@@ -3,7 +3,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ssanga_QA-example&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ssanga_QA-example)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ssanga_QA-example&metric=coverage)](https://sonarcloud.io/summary/new_code?id=ssanga_QA-example)
 
-## Introducción
+## Introducción 2
 
 Este proyecto es un ejemplo completo de integración continua y despliegue para una API REST desarrollada con FastAPI. Incluye:
 - Cobertura de tests unitarios con pytest y pytest-cov
